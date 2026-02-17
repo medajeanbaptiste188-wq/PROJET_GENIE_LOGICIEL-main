@@ -1,0 +1,94 @@
+# ========================================
+# GUIDE COMPLET D'INSTALLATION DU PROJET
+# ========================================
+
+## 1. PRÉREQUIS
+- Python 3.8+
+- pip
+
+## 2. CRÉER UN ENVIRONNEMENT VIRTUEL
+
+### Windows (PowerShell):
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+### macOS/Linux:
+python3 -m venv venv
+source venv/bin/activate
+
+## 3. INSTALLER LES DÉPENDANCES
+pip install -r requirements.txt
+
+## 4. CRÉER LES MIGRATIONS
+python manage.py makemigrations gestion
+
+## 5. APPLIQUER LES MIGRATIONS
+python manage.py migrate
+
+## 6. CRÉER UN SUPERUSER (Admin)
+python manage.py createsuperuser
+
+Entrez les informations demandées:
+- Username: admin
+- Email: admin@example.com
+- Password: (choisissez un mot de passe fort)
+
+## 7. DÉMARRER LE SERVEUR
+python manage.py runserver
+
+Le serveur sera accessible à: http://localhost:8000
+
+## 8. ACCÉDER À L'ADMIN
+- URL: http://localhost:8000/admin
+- Username: admin
+- Password: (votre mot de passe)
+
+## 9. ACCÉDER À L'API REST
+- http://localhost:8000/api/livres/
+- http://localhost:8000/api/membres/
+- http://localhost:8000/api/emprunts/
+
+## STRUCTURE DU PROJET
+bibliotheque_django/
+├── manage.py                 # Point d'entrée Django
+├── config/                   # Configuration Django
+│   ├── settings.py          # Paramètres du projet
+│   ├── urls.py              # Routes principales
+│   ├── wsgi.py              # WSGI application
+│   └── asgi.py              # ASGI application
+├── gestion/                  # Votre application Django
+│   ├── models.py            # Modèles de données
+│   ├── views.py             # Vues API
+│   ├── serializers.py       # Sérialisation
+│   ├── urls.py              # Routes de l'app
+│   ├── admin.py             # Interface admin
+│   ├── forms.py             # Formulaires
+│   ├── signals.py           # Signaux Django
+│   └── templates/           # Templates HTML
+├── db.sqlite3               # Base de données (créée après migration)
+└── requirements.txt         # Dépendances
+
+## DÉPANNAGE
+
+### Erreur: "No module named 'django'"
+→ Vérifier que l'environnement virtuel est activé
+→ Réinstaller: pip install -r requirements.txt
+
+### Erreur: "ModuleNotFoundError: No module named 'config'"
+→ Vérifier que manage.py est dans le répertoire racine
+→ Vérifier que vous êtes dans le bon répertoire
+
+### Erreur lors de makemigrations
+→ Vérifier les erreurs de syntaxe dans models.py
+→ Vérifier que gestion est dans INSTALLED_APPS
+
+### Port 8000 déjà utilisé
+→ python manage.py runserver 8001
+
+## ÉTAPES SUIVANTES
+
+1. Tester l'API avec Postman ou curl
+2. Connecter votre frontend JavaScript
+3. Configurer l'authentification personnalisée
+4. Mettre en place les permissions
+5. Déployer en production

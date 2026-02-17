@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioGest - Tableau de bord</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">📚</div>
+                <h2>BiblioGest</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="./dashboard.html"><span>📊</span> Dashboard</a></li>
+                    <li><a href="./livres.html"><span>📚</span> Catalogue</a></li>
+                    <li><a href="./membres.html"><span>👥</span> Membres</a></li>
+                    <li><a href="./emprunts.html"><span>📋</span> Emprunts</a></li>
+                    <li><a href="./parametres.html"><span>⚙️</span> Paramètres</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-details">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Bibliothécaire</span>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="logout-btn"> Déconnexion</button>
+            </div>
+        </aside>
+        
+      
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Tableau de bord</h1>
+                <div class="top-bar-actions">
+                    <span class="date-display" id="currentDate"></span>
+                </div>
+            </header>
+            
+           
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-info">
+                        <h3 id="totalLivres">1,234</h3>
+                        <p>Livres</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-info">
+                        <h3 id="totalEmprunts">456</h3>
+                        <p>Empruntés</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <h3 id="totalMembres">89</h3>
+                        <p>Membres</p>
+                    </div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-info">
+                        <h3 id="totalRetards">12</h3>
+                        <p>En retard</p>
+                    </div>
+                </div>
+            </div>
+            
+           
+            <div class="charts-section">
+                <div class="chart-container">
+                    <h3>📈 Activité récente</h3>
+                    <canvas id="activityChart"></canvas>
+                </div>
+            </div>
+            
+            
+            <div class="activity-grid">
+                <div class="activity-card">
+                    <h3> Emprunts récents</h3>
+                    <div class="activity-list" id="recentEmprunts">
+                        
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <h3> Retards à signaler</h3>
+                    <div class="activity-list" id="retardsList">
+                       
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    
+    <script src="../static/js/api.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/auth.js"></script>
+</body>
+</html> 

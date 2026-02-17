@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioGest - Emprunts</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">📚</div>
+                <h2>BiblioGest</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="./dashboard.html"><span>📊</span> Dashboard</a></li>
+                    <li><a href="./livres.html"><span>📚</span> Catalogue</a></li>
+                    <li><a href="./membres.html"><span>👥</span> Membres</a></li>
+                    <li class="active"><a href="./emprunts.html"><span>📋</span> Emprunts</a></li>
+                    <li><a href="./parametres.html"><span>⚙️</span> Paramètres</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-details">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Bibliothécaire</span>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">Déconnexion</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Gestion des Emprunts</h1>
+                <div class="top-bar-actions">
+                    <div>
+                        <input class="search-box" type="text" id="searchEmprunts" placeholder="🔍 Rechercher...">
+                    </div>
+                    <a href="./ajouter-emprunt.html" class="btn-primary">➕ Ajouter</a>
+                </div>
+            </header>
+            
+            
+            
+            <!-- Current Loans -->
+            <div class="loans-section">
+                <h3>Emprunts en cours</h3>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Livre</th>
+                                <th>Emprunteur</th>
+                                <th>Date emprunt</th>
+                                <th>Retour prévu</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="loansTableBody">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Loan Extension -->
+            <div class="extension-section">
+                <h3>Prolonger un emprunt</h3>
+                <div class="extension-form">
+                    <input type="text" id="loanIdInput" placeholder="N° emprunt" class="loan-id-input">
+                    <button type="button" id="add7DaysBtn" class="btn-secondary">➕ Ajouter 7j</button>
+                    <button type="button" id="add14DaysBtn" class="btn-secondary">➕ Ajouter 14j</button>
+                    <button type="button" id="validateExtensionBtn" class="btn-success">OK</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../static/js/api.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/auth.js"></script>
+</body>
+</html>

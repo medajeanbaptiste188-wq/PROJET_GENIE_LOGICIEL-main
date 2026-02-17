@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioGest - Modifier un livre</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>📚 Modifier le livre</h2>
+                <a href="./livres.html" class="close-btn">❌</a>
+            </div>
+            
+            <form id="editBookForm" class="book-form">
+                <div class="form-row">
+                    <div class="cover-upload">
+                        <div class="cover-placeholder" id="coverPreview">📖</div>
+                        <input type="file" id="bookCoverInput" accept="image/*" hidden>
+                        <button type="button" id="coverUploadBtn" class="btn-secondary">Télécharger une image</button>
+                    </div>
+                    
+                    <div class="form-fields">
+                        <div class="form-group">
+                            <label>Titre *</label>
+                            <input type="text" id="titre" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Auteur *</label>
+                                <input type="text" id="auteur" required>
+                            </div>
+                            <div class="form-group">
+                                <label>ISBN</label>
+                                <input type="text" id="isbn">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Éditeur</label>
+                                <input type="text" id="editeur">
+                            </div>
+                            <div class="form-group">
+                                <label>Année</label>
+                                <input type="number" id="annee">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Genre *</label>
+                                <select id="genre" required>
+                                    <option value="">Sélectionner</option>
+                                    <option value="Romans">Romans</option>
+                                    <option value="Sciences">Sciences</option>
+                                    <option value="Histoire">Histoire</option>
+                                    <option value="BD">BD</option>
+                                    <option value="Jeunesse">Jeunesse</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre d'exemplaires *</label>
+                                <input type="number" id="total" value="1" min="1" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="description" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Emplacement</label>
+                            <input type="text" id="emplacement" placeholder="Étagère A3">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Note</label>
+                            <input type="number" id="note" min="0" max="5" step="0.5" value="3">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary"> ENREGISTRER</button>
+                    <a href="./livres.html" class="btn-secondary"> ANNULER</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../static/js/api.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/script.js"></script>
+    
+    <script>
+        console.log('=== Script inline modifié-livre chargé ===');
+        console.log('Type de getLivre:', typeof getLivre);
+        console.log('Type de modifierLivre:', typeof modifierLivre);
+        
+        // Gestionnaire spécifique pour la page de modification
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('=== DOMContentLoaded: modifier-livre ===');
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const livreId = urlParams.get('id');
+            
+            console.log('ID du livre:', livreId);
+            
+            if (!livreId) {
+                alert('ID du livre manquant');
+                window.location.href = './livres.html';
+                return;
+            }
+            
+            // Charger les données du livre
+            try {
+                console.log('Appel de getLivre...');
+                const livre = await getLivre(livreId);
+                console.log('Livre chargé:', livre);
+                
+                if (livre) {
+                    console.log('Remplissage du formulaire...');
+                    document.getElementById('titre').value = livre.titre;
+                    document.getElementById('auteur').value = livre.auteur;
+                    document.getElementById('isbn').value = livre.isbn || '';
+                    document.getElementById('editeur').value = livre.editeur || '';
+                    document.getElementById('annee').value = livre.annee || '';
+                    document.getElementById('genre').value = livre.genre || '';
+                    document.getElementById('total').value = livre.total || 1;
+                    document.getElementById('description').value = livre.description || '';
+                    document.getElementById('emplacement').value = livre.emplacement || '';
+                    document.getElementById('note').value = livre.note || 3;
+
+                    const coverPreview = document.getElementById('coverPreview');
+                    if (livre.couverture && coverPreview) {
+                        const apiBase = typeof API_BASE_URL !== 'undefined' ? API_BASE_URL : `${window.location.protocol}//${window.location.host}/api`;
+                        const backendOrigin = apiBase.replace(/\/api\/?$/, '');
+                        const imageUrl = livre.couverture.startsWith('http')
+                            ? livre.couverture
+                            : `${backendOrigin}${livre.couverture}`;
+                        coverPreview.classList.add('has-image');
+                        coverPreview.innerHTML = `<img src="${imageUrl}" alt="Couverture du livre" class="cover-preview-image">`;
+                    }
+                    console.log('Formulaire rempli avec succès');
+                } else {
+                    alert('Livre non trouvé');
+                    window.location.href = './livres.html';
+                    return;
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement du livre:', error);
+                alert('Erreur lors du chargement du livre: ' + error.message);
+                window.location.href = './livres.html';
+                return;
+            }
+            
+            // Attacher le gestionnaire submit APRÈS le chargement des données
+            console.log('Recherche du formulaire editBookForm...');
+            const editBookForm = document.getElementById('editBookForm');
+            console.log('Formulaire trouvé?', editBookForm !== null);
+            
+            if (!editBookForm) {
+                console.error('ERREUR: Le formulaire editBookForm n\'a pas été trouvé!');
+                return;
+            }
+            
+            console.log('Ajout du gestionnaire submit...');
+            editBookForm.addEventListener('submit', async function(e) {
+                console.log('=== SUBMIT EVENT DÉCLENCHÉ ===');
+                e.preventDefault();
+                console.log('preventDefault() appelé');
+                
+                const livre = new FormData();
+                livre.append('titre', document.getElementById('titre').value);
+                livre.append('auteur', document.getElementById('auteur').value);
+                livre.append('isbn', document.getElementById('isbn').value);
+                livre.append('editeur', document.getElementById('editeur').value);
+                livre.append('annee', parseInt(document.getElementById('annee').value) || new Date().getFullYear());
+                livre.append('genre', document.getElementById('genre').value);
+                livre.append('total', parseInt(document.getElementById('total').value) || 1);
+                livre.append('description', document.getElementById('description').value);
+                livre.append('emplacement', document.getElementById('emplacement').value);
+                livre.append('note', parseFloat(document.getElementById('note').value) || 0);
+
+                const coverFile = document.getElementById('bookCoverInput')?.files?.[0];
+                if (coverFile) {
+                    livre.append('couverture', coverFile);
+                }
+                
+                console.log('Données à envoyer:', livre);
+                console.log('ID du livre:', livreId);
+                console.log('Appel de modifierLivre...');
+                
+                const resultat = await modifierLivre(livreId, livre);
+                console.log('Résultat:', resultat);
+                
+                if (resultat) {
+                    window.location.href = './livres.html';
+                }
+            });
+            console.log('Gestionnaire submit attaché avec succès');
+        });
+    </script>

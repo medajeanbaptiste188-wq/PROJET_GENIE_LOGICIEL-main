@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioGest - Confirmer un retour</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>✅ Confirmer le retour</h2>
+                <a href="./emprunts.html" class="close-btn">❌</a>
+            </div>
+
+            <p style="margin-bottom: 10px;"><h3>Confirme le retour de cet emprunt :</h3></p>
+            <p id="confirmLoanInfo" style="margin-bottom: 20px; font-weight: 500;"></p>
+
+            <form id="confirmLoanForm" class="book-form">
+                <div class="form-actions">
+                    <button type="submit" class="btn-success">CONFIRMER</button>
+                    <a href="./emprunts.html" class="btn-secondary">ANNULER</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../static/js/api.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

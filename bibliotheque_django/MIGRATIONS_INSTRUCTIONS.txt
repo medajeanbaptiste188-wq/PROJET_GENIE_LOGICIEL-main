@@ -1,0 +1,17 @@
+# Fichier d'instructions pour les migrations Django
+
+# Après avoir créé les fichiers models.py, exécutez:
+
+# 1. Créer les migrations
+python manage.py makemigrations gestion
+
+# 2. Verifier les migrations
+python manage.py showmigrations
+
+# 3. Appliquer les migrations
+python manage.py migrate
+
+# Cela crée automatiquement les tables:
+# - gestion_livre
+# - gestion_membre
+# - gestion_emprunt

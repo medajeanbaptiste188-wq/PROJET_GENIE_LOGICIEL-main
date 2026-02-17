@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioGest - Catalogue</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar (same as dashboard) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">📚</div>
+                <h2>BiblioGest</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="./dashboard.html"><span>📊</span> Dashboard</a></li>
+                    <li class="active"><a href="./livres.html"><span>📚</span> Catalogue</a></li>
+                    <li><a href="./membres.html"><span>👥</span> Membres</a></li>
+                    <li><a href="./emprunts.html"><span>📋</span> Emprunts</a></li>
+                    <li><a href="./parametres.html"><span>⚙️</span> Paramètres</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-details">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Bibliothécaire</span>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">Déconnexion</button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Gestion des Livres</h1>
+                <div class="top-bar-actions">
+                    <div>
+                        <input class="search-box" type="text" id="searchLivres" placeholder="🔍 Rechercher un livre...">
+                    </div>
+                    <a href="./ajouter-livre.html" class="btn-primary">➕ Ajouter</a>
+                </div>
+            </header>
+            
+            <!-- Filters -->
+            <div class="filters-section">
+                <span class="filter-label">Filtres :</span>
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="Romans">Romans</button>
+                <button class="filter-btn" data-filter="Sciences">Sciences</button>
+                <button class="filter-btn" data-filter="Histoire">Histoire</button>
+                <button class="filter-btn" data-filter="BD">BD</button>
+                <button class="filter-btn" data-filter="Jeunesse">Jeunesse</button>
+            </div>
+            
+            <!-- Books Grid -->
+            <div class="books-grid" id="booksContainer">
+                <!-- Dynamically populated -->
+            </div>
+            
+        </main>
+    </div>
+    
+    <script src="../static/js/api.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioGest - Paramètres</title>
+    <link id="theme-style" rel="stylesheet" href="">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">📚</div>
+                <h2>BiblioGest</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="./dashboard.html"><span>📊</span> Dashboard</a></li>
+                    <li><a href="./livres.html"><span>📚</span> Catalogue</a></li>
+                    <li><a href="./membres.html"><span>👥</span> Membres</a></li>
+                    <li><a href="./emprunts.html"><span>📋</span> Emprunts</a></li>
+                    <li class="active"><a href="./parametres.html"><span>⚙️</span> Paramètres</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-details">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Bibliothécaire</span>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">Déconnexion</button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1> Paramètres</h1>
+                <div class="top-bar-actions">
+                    <span class="date-display" id="currentDate"></span>
+                </div>
+            </header>
+            
+            <!-- Settings Grid -->
+            <div class="settings-grid">
+                
+                <!-- Apparence Card -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                       
+                        <h2>Apparence</h2>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>Mode d'affichage</h3>
+                        <p class="settings-description">Choisissez le thème de l'application</p>
+                        
+                        <div class="theme-options">
+                            <div class="theme-option" data-theme="light">
+                                <div class="theme-preview light-preview">
+                                    <div class="preview-header"></div>
+                                    <div class="preview-sidebar"></div>
+                                    <div class="preview-content"></div>
+                                </div>
+                                <div class="theme-info">
+                                    <span class="theme-name">Mode Clair</span>
+                                    <span class="theme-check" id="check-light">✓</span>
+                                </div>
+                                <button class="theme-select-btn" data-theme="light">Sélectionner</button>
+                            </div>
+                            
+                            <div class="theme-option" data-theme="dark">
+                                <div class="theme-preview dark-preview">
+                                    <div class="preview-header dark"></div>
+                                    <div class="preview-sidebar dark"></div>
+                                    <div class="preview-content dark"></div>
+                                </div>
+                                <div class="theme-info">
+                                    <span class="theme-name">Mode Nuit</span>
+                                    <span class="theme-check" id="check-dark">✓</span>
+                                </div>
+                                <button class="theme-select-btn" data-theme="dark">Sélectionner</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>Réglages supplémentaires</h3>
+                        
+                        <div class="setting-item">
+                            <div class="setting-item-info">
+                                <span class="setting-item-label">Rafraîchissement auto dashboard</span>
+                                <span class="setting-item-description">Actualiser automatiquement les stats du tableau de bord</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="dashboardRefreshToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-item-info">
+                                <span class="setting-item-label">Surligner les emprunts en retard</span>
+                                <span class="setting-item-description">Mettre en évidence les lignes en retard dans la table des emprunts</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="highlightLateToggle" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Préférences d'affichage Card -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                       
+                        <h2>Préférences d'affichage</h2>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <div class="setting-item">
+                            <div class="setting-item-info">
+                                <span class="setting-item-label"> Densité d'affichage</span>
+                                <span class="setting-item-description">Ajuster l'espacement des éléments</span>
+                            </div>
+                            <select id="densitySelect" class="settings-select">
+                                <option value="comfortable">Confortable</option>
+                                <option value="compact" selected>Compact</option>
+                                <option value="spacious">Aéré</option>
+                            </select>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-item-info">
+                                <span class="setting-item-label"> Taille de police</span>
+                                <span class="setting-item-description">Modifier la taille du texte</span>
+                            </div>
+                            <select id="fontSizeSelect" class="settings-select">
+                                <option value="small">Petite</option>
+                                <option value="medium" selected>Moyenne</option>
+                                <option value="large">Grande</option>
+                            </select>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-item-info">
+                                <span class="setting-item-label"> Contraste élevé</span>
+                                <span class="setting-item-description">Améliorer la lisibilité</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="highContrastToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-actions">
+                        <button id="resetSettingsBtn" class="btn-secondary">↺ Réinitialiser</button>
+                        <button id="saveSettingsBtn" class="btn-primary"> Sauvegarder</button>
+                    </div>
+                </div>
+                
+                <!-- À propos Card -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                   
+                        <h2>À propos</h2>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <div class="about-info">
+                            <div class="about-logo">📚 BiblioGest</div>
+                            <div class="about-version">Version 2.0.0</div>
+                            <div class="about-description">
+                                Système de gestion de bibliothèque complet avec mode nuit/clair.
+                            </div>
+                            <div class="about-details">
+                                <p><strong>Développé avec :</strong> HTML5, CSS3, JavaScript</p>
+                                <p><strong>Bibliothèques :</strong> Chart.js</p>
+                                <p><strong>Dernière mise à jour :</strong> Février 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../static/js/api.js"></script>
+    <script src="../static/js/auth.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

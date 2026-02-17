@@ -1,0 +1,289 @@
+/* ===== MODE NUIT ===== */
+.dark-mode {
+    --primary-color: #1a2634;
+    --secondary-color: #e67e22;
+    --accent-color: #3498db;
+    --bg-color: #0f1217;
+    --text-color: #ecf0f1;
+    --text-secondary: #bdc3c7;
+    --card-bg: #1e272e;
+    --border-color: #2c3e50;
+    --hover-bg: #2c3e50;
+    --shadow-color: rgba(0,0,0,0.3);
+    --input-bg: #2c3e50;
+    --table-header-bg: #1e272e;
+    --table-row-hover: #2c3e50;
+}
+
+body.dark-mode {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.dark-mode .sidebar,
+.dark-mode .stat-card,
+.dark-mode .activity-card,
+.dark-mode .chart-container,
+.dark-mode .book-card,
+.dark-mode .table-container,
+.dark-mode .filters-section,
+.dark-mode .scanner-section,
+.dark-mode .extension-section,
+.dark-mode .stat-mini-card,
+.dark-mode .settings-card,
+.dark-mode .modal-container,
+.dark-mode .login-card,
+.dark-mode .table-container,
+.dark-mode .notification,
+.dark-mode .about-details {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .modal-overlay {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.dark-mode .sidebar-header,
+.dark-mode .sidebar-footer {
+    border-color: var(--border-color);
+}
+
+.dark-mode .sidebar-nav li:hover {
+    background: var(--hover-bg);
+}
+
+.dark-mode .sidebar-nav li.active {
+    background: var(--accent-color);
+}
+
+.dark-mode .sidebar-nav a {
+    color: var(--text-color);
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode .stat-info h3,
+.dark-mode .book-title {
+    color: var(--text-color);
+}
+
+.dark-mode .form-group label {
+    color: var(--text-secondary);
+}
+
+.dark-mode .modal-header,
+.dark-mode .settings-card-header,
+.dark-mode .setting-item,
+.dark-mode .settings-actions,
+.dark-mode .activity-item {
+    border-color: var(--border-color);
+}
+
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea {
+    background: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode input::placeholder {
+    color: #7f8c8d;
+}
+
+.dark-mode .data-table th {
+    background: var(--table-header-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.dark-mode .data-table td {
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .data-table tr:hover {
+    background: var(--table-row-hover);
+}
+
+.dark-mode .filter-btn {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .filter-btn:hover,
+.dark-mode .filter-btn.active {
+    background: var(--primary-color);
+    border-color: var(--accent-color);
+    color: white;
+}
+
+.dark-mode .filter-label {
+    color: var(--text-color);
+}
+
+.dark-mode .btn-secondary {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .btn-secondary:hover {
+    background: var(--hover-bg);
+}
+
+.dark-mode .top-bar h1,
+.dark-mode .extension-section h3,
+.dark-mode .settings-card-header h2,
+.dark-mode .settings-section h3,
+.dark-mode .about-logo {
+    color: var(--text-color);
+}
+
+.dark-mode .close-btn,
+.dark-mode .login-card h2,
+.dark-mode .stat-info p,
+.dark-mode .stat-label,
+.dark-mode .settings-description,
+.dark-mode .setting-item-description,
+.dark-mode .about-description,
+.dark-mode .scanner-separator,
+.dark-mode .notification-close {
+    color: var(--text-secondary);
+}
+
+.dark-mode .theme-option:hover {
+    background: var(--hover-bg);
+}
+
+.dark-mode .theme-option.active {
+    background: rgba(52, 152, 219, 0.2);
+    border-color: var(--accent-color);
+}
+
+.dark-mode .about-version {
+    background: rgba(52, 152, 219, 0.2);
+    color: #8ecbff;
+}
+
+.dark-mode .page-btn {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .page-btn.active,
+.dark-mode .page-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--accent-color);
+    color: white;
+}
+
+.dark-mode .status-available {
+    background: rgba(39, 174, 96, 0.2);
+    color: #2ecc71;
+}
+
+.dark-mode .status-borrowed {
+    background: rgba(243, 156, 18, 0.2);
+    color: #f39c12;
+}
+
+.dark-mode .status-active {
+    background: rgba(39, 174, 96, 0.2);
+    color: #2ecc71;
+}
+
+.dark-mode .status-suspended {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.dark-mode .cover-placeholder {
+    background: var(--hover-bg);
+    border-color: var(--border-color);
+}
+
+.dark-mode .stat-mini-card .stat-label {
+    color: var(--text-secondary);
+}
+
+.dark-mode .stat-mini-card .stat-value {
+    color: var(--text-color);
+}
+
+.dark-mode .activity-item {
+    border-color: var(--border-color);
+}
+
+.dark-mode .notification-badge {
+    color: var(--text-color);
+}
+
+.dark-mode .date-display {
+    color: var(--text-secondary);
+}
+
+.dark-mode .user-role {
+    color: var(--text-secondary);
+}
+
+.dark-mode .book-editor,
+.dark-mode .book-isbn {
+    color: var(--text-secondary);
+}
+
+.dark-mode .scanner-card {
+    background: var(--hover-bg);
+}
+
+.dark-mode .theme-preview.light-preview,
+.dark-mode .theme-preview.dark-preview {
+    border-color: var(--border-color);
+}
+
+.dark-mode .theme-option.active .theme-preview {
+    border-color: var(--accent-color);
+}
+
+.dark-mode .settings-select {
+    background: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .toggle-slider {
+    background-color: var(--border-color);
+}
+
+.dark-mode .toggle-slider:before {
+    background-color: var(--text-color);
+}
+
+.dark-mode input:checked + .toggle-slider {
+    background-color: var(--accent-color);
+}
+
+/* Scrollbar personnalisée pour le mode nuit */
+.dark-mode ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+    background: var(--card-bg);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioGest - Supprimer un livre</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>📚 Supprimer le livre</h2>
+                <a href="./livres.html" class="close-btn">❌</a>
+            </div>
+            
+            <h3>Êtes-vous sûr de vouloir supprimer ce livre ?</h3>
+            <p id="deleteBookInfo" style="margin-bottom: 20px; font-weight: 400;"></p>
+
+            <form id="deleteBookForm" class="book-form">
+                <div class="form-actions">
+                    <button type="submit" class="btn-delete">SUPPRIMER</button>
+                    <a href="./livres.html" class="btn-secondary"> ANNULER</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../static/js/api.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
