@@ -47,9 +47,9 @@ Signaux Django pour mettre à jour automatiquement la disponibilité des livres
 ### Étapes:
 
 1. **Installer les dépendances**:
-   ```bash
+```bash
    pip install -r requirements.txt
-   ```
+```
 
 2. **Configurer settings.py**:
    - Ajouter `'rest_framework'` et `'gestion'` à `INSTALLED_APPS`
@@ -62,20 +62,20 @@ Signaux Django pour mettre à jour automatiquement la disponibilité des livres
    ```
 
 4. **Créer les migrations**:
-   ```bash
+```bash
    python manage.py makemigrations gestion
    python manage.py migrate
-   ```
+```
 
 5. **Créer un superuser**:
-   ```bash
+```bash
    python manage.py createsuperuser
-   ```
+```
 
 6. **Démarrer le serveur**:
-   ```bash
+```bash
    python manage.py runserver
-   ```
+```
 
 ---
 

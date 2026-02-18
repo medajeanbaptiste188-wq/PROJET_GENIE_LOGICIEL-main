@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             // Simuler une authentification
-            if (email === 'medajeanbaptiste188@gmail.com' && password === 'admin123') {
+            if (email === 'medajeanbaptiste188@gmail.com' && password === '20012003Jean@?') {
                 localStorage.setItem('isLoggedIn', 'true');
                 window.location.href = getDashboardUrl();
             } else {
