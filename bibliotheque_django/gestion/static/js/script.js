@@ -4,11 +4,11 @@ function isLocalFileMode() {
 
 function isLoginPage() {
     const path = window.location.pathname.toLowerCase();
-    return path === '/' || path.endsWith('/index.html') || path.endsWith('\\index.html');
+    return path.endsWith('/index.html') || path.endsWith('\\index.html');
 }
 
 function getLoginUrl() {
-    return isLocalFileMode() ? 'index.html' : '/';
+    return isLocalFileMode() ? 'accueil.html' : '/';
 }
 
 function getSavedAppSettings() {
@@ -753,7 +753,12 @@ async function setupEventListeners() {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function() {
+            if (typeof logoutSession === 'function') {
+                logoutSession();
+                return;
+            }
             localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('authUser');
             window.location.href = getLoginUrl();
         });
     }

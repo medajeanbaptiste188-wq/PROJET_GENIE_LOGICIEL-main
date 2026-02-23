@@ -12,6 +12,100 @@ const API_BASE_URL = (() => {
     return `${window.location.origin}/api`;
 })();
 
+const IS_LOCAL_FILE_MODE = window.location.protocol === 'file:';
+const API_ORIGIN = new URL(API_BASE_URL).origin;
+let csrfTokenCache = '';
+
+function getCsrfTokenFromCookie() {
+    const cookieName = 'csrftoken=';
+    const cookies = document.cookie ? document.cookie.split(';') : [];
+    for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(cookieName)) {
+            return decodeURIComponent(cookie.substring(cookieName.length));
+        }
+    }
+    return '';
+}
+
+function getCsrfTokenFromDom() {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    if (meta?.content) {
+        return meta.content;
+    }
+    const input = document.querySelector('input[name="csrfmiddlewaretoken"]');
+    if (input?.value) {
+        return input.value;
+    }
+    return '';
+}
+
+async function ensureCsrfToken() {
+    const cookieToken = getCsrfTokenFromCookie();
+    if (cookieToken) {
+        return cookieToken;
+    }
+
+    const domToken = getCsrfTokenFromDom();
+    if (domToken) {
+        return domToken;
+    }
+
+    if (csrfTokenCache) {
+        return csrfTokenCache;
+    }
+
+    try {
+        const response = await originalFetch(`${API_BASE_URL}/csrf/`, {
+            method: 'GET',
+            credentials: IS_LOCAL_FILE_MODE ? 'include' : 'same-origin',
+        });
+
+        if (!response.ok) {
+            return '';
+        }
+
+        const data = await response.json();
+        csrfTokenCache = data?.csrfToken || '';
+        return csrfTokenCache;
+    } catch (error) {
+        console.warn('Impossible de récupérer le token CSRF:', error);
+        return '';
+    }
+}
+
+const originalFetch = window.fetch.bind(window);
+window.fetch = async function(input, init = {}) {
+    const requestUrl = typeof input === 'string' ? input : input?.url || '';
+    const normalizedUrl = requestUrl ? new URL(requestUrl, window.location.href) : null;
+    const method = (init.method || 'GET').toUpperCase();
+    const isUnsafeMethod = ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method);
+    const isApiRequest = normalizedUrl
+        ? normalizedUrl.href.startsWith(API_BASE_URL) ||
+          (normalizedUrl.origin === API_ORIGIN && normalizedUrl.pathname.startsWith('/api/'))
+        : false;
+
+    const nextInit = { ...init };
+    const headers = new Headers(init.headers || {});
+
+    if (isApiRequest) {
+        // Keep Django session/cookies on local file mode and same-origin pages.
+        if (!nextInit.credentials) {
+            nextInit.credentials = IS_LOCAL_FILE_MODE ? 'include' : 'same-origin';
+        }
+
+        if (isUnsafeMethod) {
+            const csrfToken = await ensureCsrfToken();
+            if (csrfToken && !headers.has('X-CSRFToken')) {
+                headers.set('X-CSRFToken', csrfToken);
+            }
+        }
+    }
+
+    nextInit.headers = headers;
+    return originalFetch(input, nextInit);
+};
+
 // ===== LIVRES =====
 
 async function getLivres() {

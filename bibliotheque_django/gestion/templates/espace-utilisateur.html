@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioGest - Espace Utilisateur</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">📚</div>
+                <h2>BiblioGest</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#catalogueSection"><span>📚</span> Rechercher un livre</a></li>
+                    <li><a href="./parametres-utilisateur.html"><span>⚙️</span> Paramètres</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Utilisateur</span>
+                        <span class="user-role">Membre</span>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">Déconnexion</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Espace utilisateur</h1>
+                <div class="top-bar-actions">
+                    <input class="search-box" type="text" id="searchUserBooks" placeholder="🔍 Rechercher par titre...">
+                </div>
+            </header>
+
+            <div id="userActionMessage" style="display:none; margin: 0 0 12px 0; padding: 10px 12px; border-radius: 8px; font-weight: 600;"></div>
+
+            <section id="catalogueSection">
+                <h3>Catalogue des livres disponibles</h3>
+                <div class="filters-section">
+                    <span class="filter-label">Filtres :</span>
+                    <button class="filter-btn active user-filter-btn" data-filter="all">Tous</button>
+                    <button class="filter-btn user-filter-btn" data-filter="Romans">Romans</button>
+                    <button class="filter-btn user-filter-btn" data-filter="Sciences">Sciences</button>
+                    <button class="filter-btn user-filter-btn" data-filter="Histoire">Histoire</button>
+                    <button class="filter-btn user-filter-btn" data-filter="BD">BD</button>
+                    <button class="filter-btn user-filter-btn" data-filter="Jeunesse">Jeunesse</button>
+                </div>
+                <div class="books-grid" id="userBooksContainer"></div>
+            </section>
+
+            <section id="empruntsSection" class="loans-section" style="margin-top: 24px;">
+                <h3>Mes emprunts</h3>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Livre</th>
+                                <th>Date emprunt</th>
+                                <th>Retour prévu</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userLoansTableBody"></tbody>
+                    </table>
+                </div>
+                
+            </section>
+        </main>
+    </div>
+
+    <script src="../static/js/api.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/auth.js"></script>
+    <script src="../static/js/user.js"></script>
+</body>
+</html>

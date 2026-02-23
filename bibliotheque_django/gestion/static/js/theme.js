@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
     setupThemeEventListeners();
     
     // Mettre à jour les indicateurs visuels dans la page paramètres
-    if (window.location.pathname.includes('parametres.html')) {
+    if (
+        window.location.pathname.includes('parametres.html') ||
+        window.location.pathname.includes('parametres-utilisateur.html')
+    ) {
         updateThemeSelectionUI();
     }
 });
