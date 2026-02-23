@@ -35,6 +35,7 @@ def login_api(request):
     except json.JSONDecodeError:
         payload = {}
     identifier = (payload.get('identifier') or payload.get('email') or '').strip()
+    identifier_normalized = identifier.lower()
     password = payload.get('password') or ''
     portal = (payload.get('portal') or '').strip().lower()
     access_code = payload.get('access_code') or ''
@@ -42,18 +43,27 @@ def login_api(request):
     if not identifier or not password:
         return JsonResponse({'detail': "Identifiant et mot de passe obligatoires"}, status=400)
 
-    user = authenticate(request, username=identifier, password=password)
+    # Approche robuste: on cherche d'abord des candidats et on valide le mot de passe.
+    candidates = User.objects.filter(
+        Q(username__iexact=identifier_normalized)
+        | Q(email__iexact=identifier_normalized)
+        | Q(first_name__iexact=identifier)
+    )
+    if portal == 'bibliothecaire':
+        candidates = candidates.filter(is_staff=True)
+    elif portal == 'utilisateur':
+        candidates = candidates.filter(is_staff=False)
+
+    user = None
+    for candidate in candidates:
+        if candidate.check_password(password):
+            user = candidate
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            break
+
+    # Dernier fallback via authenticate (au cas où backend custom).
     if user is None:
-        # Fallback robuste: tester tous les comptes correspondant à username/email (insensible à la casse)
-        candidates = User.objects.filter(
-            Q(username__iexact=identifier) | Q(email__iexact=identifier)
-        )
-        for candidate in candidates:
-            if candidate.check_password(password):
-                user = candidate
-                # Nécessaire quand on passe hors authenticate(...)
-                user.backend = 'django.contrib.auth.backends.ModelBackend'
-                break
+        user = authenticate(request, username=identifier, password=password)
 
     if user is None:
         return JsonResponse({'detail': 'Identifiants invalides'}, status=401)
